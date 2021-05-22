@@ -2,8 +2,11 @@ package classes;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Event;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -22,13 +25,13 @@ public class InterfaceApp implements ActionListener {
 	JTextArea ta;
 	JLabel label;
 	FooBarQix fooBarQix = new FooBarQix();
-	JScrollPane sp;
-	
+	JScrollPane sp; 
 	public InterfaceApp() {
 		ta = new JTextArea();
 		label = new JLabel("Entrer un nombre entier");
 		label.setBounds(50,20, 200,50 );
 		ta.setBounds(50,150, 400, 380);
+		ta.setEditable(false);
 		textField = new JTextField("");
 		buttonOk = new JButton("OK");
 		buttonOk.setBackground(Color.green);
@@ -39,16 +42,19 @@ public class InterfaceApp implements ActionListener {
 		buttonOk.addActionListener(this);
 		buttonClean.addActionListener(this);
 		sp = new JScrollPane(ta, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED , JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		sp.setBounds(50,150, 400, 380);
 		
 		frame = new JFrame("FooBarQix App");
 		frame.setSize(new Dimension(650,650));
+		frame.setResizable(false);
+		frame.setBackground(new Color(0*123456));
 		frame.setLayout(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(textField);
 		frame.add(buttonOk);
 		frame.add(buttonClean);
-		frame.add(ta);
 		frame.add(sp);
+		//frame.add(ta);
 		frame.add(label);
 		frame.setVisible(true);
 	}
@@ -56,13 +62,15 @@ public class InterfaceApp implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) { 
 		if(e.getSource() == buttonOk) {
-			int i = Integer.parseInt(textField.getText());  
-			ta.append(fooBarQix.fooBarQixResult(i)+"\n");
+			String s =textField.getText(); 
+			ta.append(s+ " => "+fooBarQix.fooBarQixResult(Integer.parseInt(s))+"\n");
 			textField.setText("");
 		}
 		if(e.getSource() == buttonClean) {
 			ta.setText("");
 		}
 	}
+
+ 
 		
 }
