@@ -23,12 +23,16 @@ public class InterfaceApp implements ActionListener {
 	JButton buttonClean;
 	JTextField textField;
 	JTextArea ta;
-	JLabel label;
+	JLabel label, error;
 	FooBarQix fooBarQix = new FooBarQix();
 	JScrollPane sp; 
+	
 	public InterfaceApp() {
 		ta = new JTextArea();
 		label = new JLabel("Entrer un nombre entier");
+		error = new JLabel("");
+		error.setForeground(Color.red);
+		error.setBounds(50,35, 200,50 );
 		label.setBounds(50,20, 200,50 );
 		ta.setBounds(50,150, 400, 380);
 		ta.setEditable(false);
@@ -56,6 +60,7 @@ public class InterfaceApp implements ActionListener {
 		frame.add(sp);
 		//frame.add(ta);
 		frame.add(label);
+		frame.add(error);
 		frame.setVisible(true);
 	}
 
@@ -66,6 +71,8 @@ public class InterfaceApp implements ActionListener {
 			if(!s.isEmpty()) {
 				ta.append(s+ " => "+fooBarQix.fooBarQixResult(Integer.parseInt(s))+"\n");
 				textField.setText("");
+			}else {
+				error.setText("Enter a number !");
 			}
 		}
 		if(e.getSource() == buttonClean) {
