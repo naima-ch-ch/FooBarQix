@@ -63,8 +63,10 @@ public class InterfaceApp implements ActionListener {
 	public void actionPerformed(ActionEvent e) { 
 		if(e.getSource() == buttonOk) {
 			String s =textField.getText(); 
-			ta.append(s+ " => "+fooBarQix.fooBarQixResult(Integer.parseInt(s))+"\n");
-			textField.setText("");
+			if(!s.isEmpty()) {
+				ta.append(s+ " => "+fooBarQix.fooBarQixResult(Integer.parseInt(s))+"\n");
+				textField.setText("");
+			}
 		}
 		if(e.getSource() == buttonClean) {
 			ta.setText("");
